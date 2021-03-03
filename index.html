@@ -15,6 +15,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
+<style>
+.detail-vypujcky-container{
+    display:block;
+    overflow: hidden;
+    transition: height linear .5s;
+    height: 0px;
+}
+</style>
 
 <body>
     <div class="main-container-layout main-container-layout-profil">
@@ -225,6 +233,29 @@
             </div>
         </footer>
     </div>
+    <script>
+        let vypujckaItem = document.getElementsByClassName("vypujcka-item");
+        for (let prvek of vypujckaItem){
+
+            prvek.getElementsByTagName("input")[0].onclick = function(){
+                //let chck = prvek.getElementsByTagName("input")[0];
+                let chck = prvek.querySelectorAll('input[type="checkbox"]')[0]; //zjištěno pomocí internetu jinak bych osobně použil zakomentovanou část nahoře
+                if(chck.checked){
+                    let prvekHeight = 0;
+                    for (let itemy of prvek.getElementsByClassName("detail-vypujcky-container")[0].getElementsByClassName("detail-vypujcky-item")){
+                        prvekHeight = prvekHeight+itemy.scrollHeight;
+                    }
+
+                    prvekHeight = prvekHeight + prvek.getElementsByClassName("detail-vypujcky-container")[0].getElementsByClassName("vypujcka-item-poznamka")[0].scrollHeight;
+                    prvek.getElementsByClassName("detail-vypujcky-container")[0].style.height = prvekHeight +"px";
+
+                }
+                else{
+                    prvek.getElementsByClassName("detail-vypujcky-container")[0].style.height = 0+"px";
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
